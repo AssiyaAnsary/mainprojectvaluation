@@ -19,11 +19,12 @@ $sql="select * from faculty where fid=$id"; //echo $sql;
 
 if($_SERVER["REQUEST_METHOD"] == "POST")	
 {
-	$feedback=$_POST['feedback'];
+	$subject=$_POST['subject'];
+	$link=$_POST['link'];
 	
 	if(!isset($status))
 	{
-	$sql="insert into feedbacks(userid,feedback,type) values ('$id','$feedback','Faculty')";
+	$sql="insert into classroom(fid,subject,link) values ('$id','$subject','$link')";
 	//echo $sql;
 		mysql_query($sql) or die();
 		// clear
@@ -37,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <body>
 
 <center>
-<h1>Add Feedback </h1>
+<h1>Add Classroom  </h1>
 <?php
  if(isset($msg)) { ?>
  <div style="background-color:#66CC99; color:#FFFFFF; font-size:16px;  padding:20px; margin:0px 200px;"><?php echo $msg; ?></div>
@@ -51,18 +52,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <form  name="form1" method="post"  enctype="multipart/form-data" >
   <table width="599" height="118" >
 	<tr>
-      <th width="189" height="48" scope="row"><div align="left">Name</div></th>
+      <th width="189" height="48" scope="row"><div align="left">Subject</div></th>
       <td width="16">:</td>
       <td width="378"><label>
-      <input type="text" name="name" value="<?php  echo $r["name"]; ?>" readonly="" />
+      <input type="text" name="subject" value="<?php if(isset($subject)) echo $subject; ?>"  />
 	 	</label>
         <span style="color:#FF0000;">        </span></td>
     </tr>
 	 <tr>
-      <th scope="row"><div align="left">Feedback</div></th>
+      <th scope="row"><div align="left">Upload Note</div></th>
       <td>:</td>
       <td><label>
-        <textarea name="feedback" cols="25" rows="5" required><?php if(isset($feedback)) echo $feedback;  ?></textarea>
+      <textarea name="link"><?php if(isset($link)) echo $link; ?></textarea>
       </label></td>
     </tr>
   </table>
